@@ -1,0 +1,568 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ============================================================
+// ENUMS
+// ============================================================
+
+enum UserRole {
+  STUDENT
+  PARENT
+  SCHOOL_COUNSELOR
+  SCOUT
+  UNIVERSITY_REP
+  ADMIN
+}
+
+enum Gender {
+  MALE
+  FEMALE
+  OTHER
+  PREFER_NOT_TO_SAY
+}
+
+enum CompetitionLevel {
+  SCHOOL
+  DISTRICT
+  PROVINCIAL
+  NATIONAL
+  INTERNATIONAL
+}
+
+enum OpportunityType {
+  UNIVERSITY
+  SCHOLARSHIP
+  SPORTS_RECRUITMENT
+  EXCHANGE_PROGRAMME
+  FELLOWSHIP
+  LEADERSHIP_PROGRAMME
+  INTERNSHIP
+  IN_COUNTRY_TRANSFER
+}
+
+enum DocumentType {
+  HEADMASTER_RECOMMENDATION
+  TEACHER_RECOMMENDATION
+  COACH_RECOMMENDATION
+  CERTIFICATE
+  AWARD
+  TRANSCRIPT
+  OTHER
+}
+
+enum ApplicationStatus {
+  SAVED
+  APPLIED
+  UNDER_REVIEW
+  SHORTLISTED
+  ACCEPTED
+  REJECTED
+  WITHDRAWN
+}
+
+enum VerificationStatus {
+  PENDING
+  VERIFIED
+  REJECTED
+}
+
+// ============================================================
+// USER & AUTH
+// ============================================================
+
+model User {
+  id                String    @id @default(uuid())
+  email             String    @unique
+  password          String
+  role              UserRole
+  firstName         String
+  lastName          String
+  phone             String?
+  isEmailVerified   Boolean   @default(false)
+  emailVerifyToken  String?
+  resetPasswordToken String?
+  resetPasswordExpiry DateTime?
+  isActive          Boolean   @default(true)
+  lastLoginAt       DateTime?
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+
+  // Relations
+  studentProfile    StudentProfile?
+  parentProfile     ParentProfile?
+  counselorProfile  CounselorProfile?
+  scoutProfile      ScoutProfile?
+  universityRep     UniversityRepProfile?
+  adminProfile      AdminProfile?
+  notifications     Notification[]
+  applications      Application[]
+  savedOpportunities SavedOpportunity[]
+  refreshTokens     RefreshToken[]
+
+  @@map("users")
+}
+
+model RefreshToken {
+  id        String   @id @default(uuid())
+  token     String   @unique
+  userId    String
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("refresh_tokens")
+}
+
+// ============================================================
+// ROLE-SPECIFIC PROFILES
+// ============================================================
+
+model StudentProfile {
+  id               String    @id @default(uuid())
+  userId           String    @unique
+  user             User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Personal Information
+  dateOfBirth      DateTime?
+  gender           Gender?
+  country          String?
+  city             String?
+  nationality      String?
+  school           String?
+  graduationYear   Int?
+  biography        String?   @db.Text
+  profilePhotoUrl  String?
+  profilePhotoPublicId String?
+  isPublic         Boolean   @default(true)
+
+  // Computed Scores (updated by system)
+  academicScore    Float?
+  leadershipScore  Float?
+  sportsScore      Float?
+  overallScore     Float?
+  distinctions     Int?
+
+  // Subject Strengths (0-100)
+  stemStrength     Float?
+  businessStrength Float?
+  humanitiesStrength Float?
+
+  // Relations
+  oLevelResults    OLevelResult[]
+  aLevelResults    ALevelResult[]
+  careerInterests  CareerInterest[]
+  leadershipActivities LeadershipActivity[]
+  sportProfiles    SportProfile[]
+  culturalActivities CulturalActivity[]
+  documents        Document[]
+  recommendations  Recommendation[]
+  matches          OpportunityMatch[]
+  parentId         String?
+  parent           ParentProfile? @relation(fields: [parentId], references: [id])
+
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+
+  @@map("student_profiles")
+}
+
+model ParentProfile {
+  id              String    @id @default(uuid())
+  userId          String    @unique
+  user            User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  relationship    String?
+  phone           String?
+  alternateEmail  String?
+  students        StudentProfile[]
+
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  @@map("parent_profiles")
+}
+
+model CounselorProfile {
+  id              String    @id @default(uuid())
+  userId          String    @unique
+  user            User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  school          String?
+  position        String?
+  verificationStatus VerificationStatus @default(PENDING)
+
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  @@map("counselor_profiles")
+}
+
+model ScoutProfile {
+  id              String    @id @default(uuid())
+  userId          String    @unique
+  user            User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  organisation    String?
+  sport           String?
+  country         String?
+  verificationStatus VerificationStatus @default(PENDING)
+
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  @@map("scout_profiles")
+}
+
+model UniversityRepProfile {
+  id              String    @id @default(uuid())
+  userId          String    @unique
+  user            User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  universityId    String?
+  university      University? @relation(fields: [universityId], references: [id])
+  position        String?
+  verificationStatus VerificationStatus @default(PENDING)
+
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  @@map("university_rep_profiles")
+}
+
+model AdminProfile {
+  id              String    @id @default(uuid())
+  userId          String    @unique
+  user            User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  permissions     String[]
+
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  @@map("admin_profiles")
+}
+
+// ============================================================
+// ACADEMIC RESULTS
+// ============================================================
+
+model OLevelResult {
+  id         String   @id @default(uuid())
+  profileId  String
+  profile    StudentProfile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  subject    String
+  grade      String
+  year       Int?
+  examBoard  String?  // ZIMSEC, Cambridge, etc.
+  resultDocUrl String?
+
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@map("o_level_results")
+}
+
+model ALevelResult {
+  id         String   @id @default(uuid())
+  profileId  String
+  profile    StudentProfile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  subject    String
+  grade      String
+  year       Int?
+  examBoard  String?
+  resultDocUrl String?
+
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@map("a_level_results")
+}
+
+// ============================================================
+// CAREER INTERESTS
+// ============================================================
+
+model CareerInterest {
+  id        String   @id @default(uuid())
+  profileId String
+  profile   StudentProfile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  interest  String
+
+  @@map("career_interests")
+}
+
+// ============================================================
+// LEADERSHIP
+// ============================================================
+
+model LeadershipActivity {
+  id          String   @id @default(uuid())
+  profileId   String
+  profile     StudentProfile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  title       String
+  description String?  @db.Text
+  yearsActive String?
+  startYear   Int?
+  endYear     Int?
+  isCurrentRole Boolean @default(false)
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("leadership_activities")
+}
+
+// ============================================================
+// SPORTS
+// ============================================================
+
+model SportProfile {
+  id               String   @id @default(uuid())
+  profileId        String
+  profile          StudentProfile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  sportName        String
+  position         String?
+  competitionLevel CompetitionLevel?
+  achievements     String?  @db.Text
+  statistics       String?  @db.Text
+  yearsPlayed      Int?
+  startYear        Int?
+
+  videos           SportVideo[]
+
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  @@map("sport_profiles")
+}
+
+model SportVideo {
+  id            String   @id @default(uuid())
+  sportProfileId String
+  sportProfile  SportProfile @relation(fields: [sportProfileId], references: [id], onDelete: Cascade)
+  title         String?
+  description   String?
+  videoUrl      String
+  publicId      String?
+  thumbnailUrl  String?
+  duration      Int?
+  fileSize      Int?
+  mimeType      String?
+  views         Int      @default(0)
+
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@map("sport_videos")
+}
+
+// ============================================================
+// CULTURAL ACTIVITIES
+// ============================================================
+
+model CulturalActivity {
+  id          String   @id @default(uuid())
+  profileId   String
+  profile     StudentProfile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  category    String
+  title       String
+  description String?  @db.Text
+  achievements String? @db.Text
+  years       String?
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("cultural_activities")
+}
+
+// ============================================================
+// DOCUMENTS & RECOMMENDATIONS
+// ============================================================
+
+model Document {
+  id           String       @id @default(uuid())
+  profileId    String
+  profile      StudentProfile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  type         DocumentType
+  title        String
+  fileUrl      String
+  publicId     String?
+  mimeType     String?
+  fileSize     Int?
+  isVerified   Boolean      @default(false)
+  uploadedAt   DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+
+  @@map("documents")
+}
+
+model Recommendation {
+  id            String   @id @default(uuid())
+  profileId     String
+  profile       StudentProfile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  recommenderName String
+  recommenderTitle String?
+  recommenderEmail String?
+  recommenderType  String  // headmaster, teacher, coach
+  content       String?  @db.Text
+  fileUrl       String?
+  publicId      String?
+  isVerified    Boolean  @default(false)
+
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@map("recommendations")
+}
+
+// ============================================================
+// OPPORTUNITIES
+// ============================================================
+
+model Opportunity {
+  id              String          @id @default(uuid())
+  type            OpportunityType
+  title           String
+  description     String          @db.Text
+  institution     String
+  country         String
+  region          String?
+  website         String?
+  logoUrl         String?
+
+  // Eligibility
+  eligibleCountries String[]
+  minAge          Int?
+  maxAge          Int?
+  minGrade        String?
+  requiredSubjects String[]
+  stemRequired    Boolean         @default(false)
+  sportsRequired  Boolean         @default(false)
+
+  // Financial
+  isFunded        Boolean         @default(false)
+  fundingAmount   String?
+  currency        String?
+  tuitionCovered  Boolean         @default(false)
+  accommodationCovered Boolean    @default(false)
+
+  // Dates
+  applicationDeadline DateTime?
+  programStartDate    DateTime?
+  programEndDate      DateTime?
+
+  // Scoring weights (for matching algorithm)
+  academicWeight   Float           @default(0.4)
+  leadershipWeight Float           @default(0.2)
+  sportsWeight     Float           @default(0.1)
+
+  isActive        Boolean         @default(true)
+  isFeatured      Boolean         @default(false)
+  viewCount       Int             @default(0)
+
+  university      University?     @relation(fields: [universityId], references: [id])
+  universityId    String?
+
+  matches         OpportunityMatch[]
+  applications    Application[]
+  savedBy         SavedOpportunity[]
+
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+
+  @@map("opportunities")
+}
+
+model OpportunityMatch {
+  id            String   @id @default(uuid())
+  studentId     String
+  student       StudentProfile @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  opportunityId String
+  opportunity   Opportunity @relation(fields: [opportunityId], references: [id], onDelete: Cascade)
+
+  fitScore      Float
+  academicScore Float?
+  leadershipScore Float?
+  sportsScore   Float?
+  breakdown     Json?
+
+  generatedAt   DateTime @default(now())
+
+  @@unique([studentId, opportunityId])
+  @@map("opportunity_matches")
+}
+
+model Application {
+  id            String            @id @default(uuid())
+  userId        String
+  user          User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  opportunityId String
+  opportunity   Opportunity       @relation(fields: [opportunityId], references: [id])
+  status        ApplicationStatus @default(SAVED)
+  notes         String?
+  appliedAt     DateTime?
+
+  createdAt     DateTime          @default(now())
+  updatedAt     DateTime          @updatedAt
+
+  @@unique([userId, opportunityId])
+  @@map("applications")
+}
+
+model SavedOpportunity {
+  id            String   @id @default(uuid())
+  userId        String
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  opportunityId String
+  opportunity   Opportunity @relation(fields: [opportunityId], references: [id])
+  savedAt       DateTime @default(now())
+
+  @@unique([userId, opportunityId])
+  @@map("saved_opportunities")
+}
+
+// ============================================================
+// UNIVERSITIES
+// ============================================================
+
+model University {
+  id          String   @id @default(uuid())
+  name        String
+  country     String
+  city        String?
+  website     String?
+  logoUrl     String?
+  description String?  @db.Text
+  ranking     Int?
+  isVerified  Boolean  @default(false)
+
+  opportunities Opportunity[]
+  reps          UniversityRepProfile[]
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("universities")
+}
+
+// ============================================================
+// NOTIFICATIONS
+// ============================================================
+
+model Notification {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title     String
+  message   String
+  type      String
+  isRead    Boolean  @default(false)
+  link      String?
+  metadata  Json?
+
+  createdAt DateTime @default(now())
+
+  @@map("notifications")
+}
