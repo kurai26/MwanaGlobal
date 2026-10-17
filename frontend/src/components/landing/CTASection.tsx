@@ -27,7 +27,7 @@ export function CTASection() {
             Your Global Journey Starts Today
           </h2>
           <p className="text-xl text-white/75 mb-10 max-w-2xl mx-auto leading-relaxed">
-            Join 10,000+ African students who have already discovered their path to global excellence.
+            Join 10,000+ Zimbabwean students who have already discovered their path to global excellence.
             Create your free profile in minutes.
           </p>
 

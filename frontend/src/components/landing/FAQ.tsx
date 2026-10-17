@@ -8,11 +8,11 @@ import { cn } from '@/lib/utils';
 const faqs = [
   {
     q: 'Is Mwana Global free for students?',
-    a: 'Yes! Creating a student profile and accessing opportunity matches is completely free. We believe every African student deserves access to global opportunities regardless of financial status.',
+    a: 'Yes! Creating a student profile and accessing opportunity matches is completely free. We believe every Zimbabwean student deserves access to global opportunities regardless of financial status.',
   },
   {
-    q: 'Which African countries are supported?',
-    a: 'Mwana Global supports students from all African countries. Our opportunity database includes scholarships and programmes specifically targeting students from Zimbabwe, Kenya, Ghana, Nigeria, South Africa, Uganda, Tanzania, Rwanda, and many more countries.',
+    q: 'Which students is Mwana Global for?',
+    a: 'Mwana Global is built for Zimbabwean students first. Our opportunity database includes scholarships and programmes specifically targeting students from Zimbabwe, with plans to expand regionally across Africa.',
   },
   {
     q: 'How does the matching algorithm work?',

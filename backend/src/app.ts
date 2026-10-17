@@ -9,6 +9,7 @@ import { errorHandler, notFound } from './middleware/error.middleware';
 import authRoutes from './routes/auth.routes';
 import profileRoutes from './routes/profile.routes';
 import opportunityRoutes from './routes/opportunity.routes';
+import applicationRoutes from './routes/application.routes';
 
 const app = express();
 
@@ -42,6 +43,7 @@ app.get('/health', (_req, res) => {
 app.use('/api/auth', authRoutes);
 app.use('/api/profile', profileRoutes);
 app.use('/api/opportunities', opportunityRoutes);
+app.use('/api/applications', applicationRoutes);
 
 // Public profile route
 app.get('/api/profiles/:profileId', async (req, res, next) => {

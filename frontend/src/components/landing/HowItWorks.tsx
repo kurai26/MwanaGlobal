@@ -55,7 +55,7 @@ export function HowItWorks() {
             How It Works
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Four simple steps to unlock global opportunities for African students.
+            Four simple steps to unlock global opportunities for Zimbabwean students.
           </p>
         </motion.div>
 

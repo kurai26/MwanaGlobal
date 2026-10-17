@@ -5,14 +5,14 @@ import { Users, Globe, Award, Heart, Lightbulb, Target } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'About Us | Mwana Global',
-  description: 'Learn about our mission to connect African students with life-changing opportunities.',
+  description: 'Learn about our mission to connect Zimbabwean students with life-changing opportunities.',
 };
 
 const values = [
   {
     icon: Globe,
-    title: 'African Excellence',
-    description: 'We celebrate and elevate African talent, building pathways that honour the richness of our continent\'s students.',
+    title: 'Zimbabwean Excellence',
+    description: 'We celebrate and elevate Zimbabwean talent, building pathways that honour the richness of Zimbabwe\'s students.',
   },
   {
     icon: Heart,
@@ -64,7 +64,7 @@ export default function AboutPage() {
               Discover Where Your <span className="text-brand-gold">Talent</span> Can Take You
             </h1>
             <p className="text-white/80 text-lg max-w-2xl mx-auto">
-              Mwana Global is building the platform that African students deserved all along — a single place where talent meets opportunity, regardless of background or geography.
+              Mwana Global is building the platform that Zimbabwean students deserved all along — a single place where talent meets opportunity, regardless of background or geography.
             </p>
           </div>
         </section>
@@ -75,10 +75,10 @@ export default function AboutPage() {
             <div>
               <h2 className="text-3xl font-display font-bold text-gray-900 mb-4">Our Mission</h2>
               <p className="text-gray-600 leading-relaxed mb-4">
-                Every year, thousands of talented African students miss out on life-changing scholarships, university places, and opportunities — not because they lack the ability, but because they lack access to information, guidance, and visibility.
+                Every year, thousands of talented Zimbabwean students miss out on life-changing scholarships, university places, and opportunities — not because they lack the ability, but because they lack access to information, guidance, and visibility.
               </p>
               <p className="text-gray-600 leading-relaxed mb-4">
-                Mwana Global changes that. We are building the LinkedIn, Common App, and scholarship match engine for African students — a comprehensive platform that builds their complete profile across academics, leadership, sports, and culture, then intelligently matches them to the right opportunities.
+                Mwana Global changes that. We are building the LinkedIn, Common App, and scholarship match engine for Zimbabwean students — a comprehensive platform that builds their complete profile across academics, leadership, sports, and culture, then intelligently matches them to the right opportunities.
               </p>
               <p className="text-gray-600 leading-relaxed">
                 We believe that where you were born should not determine where you can go.
@@ -130,7 +130,7 @@ export default function AboutPage() {
         <section className="py-20 px-4 max-w-6xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-display font-bold text-gray-900 mb-3">Meet the Team</h2>
-            <p className="text-gray-500">Built by Africans, for Africans</p>
+            <p className="text-gray-500">Built for Zimbabwean Excellence</p>
           </div>
           <div className="grid sm:grid-cols-3 gap-6">
             {team.map(member => (

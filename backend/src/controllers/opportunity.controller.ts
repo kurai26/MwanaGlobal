@@ -136,7 +136,24 @@ export const getMyMatches = async (req: AuthRequest, res: Response, next: NextFu
       )
     );
 
-    res.json({ success: true, data: matches });
+    const tier = req.user?.subscriptionTier ?? 'BRONZE';
+
+    if (tier === 'BRONZE') {
+      res.json({ success: true, data: { matches: [], tier, upgradeRequired: true } });
+      return;
+    }
+
+    if (tier === 'SILVER') {
+      const limited = matches.slice(0, 2).map(m => ({
+        ...m,
+        opportunity: { ...m.opportunity, institution: '[Upgrade to view]' },
+        masked: true,
+      }));
+      res.json({ success: true, data: { matches: limited, tier } });
+      return;
+    }
+
+    res.json({ success: true, data: { matches, tier } });
   } catch (err) {
     next(err);
   }

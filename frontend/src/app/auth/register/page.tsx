@@ -31,7 +31,7 @@ const roles = [
   { value: 'PARENT', label: 'Parent / Guardian', description: 'Support my child\'s journey' },
   { value: 'SCHOOL_COUNSELOR', label: 'School Counselor', description: 'Guide students at my school' },
   { value: 'SCOUT', label: 'Scout / Coach', description: 'Discover talented athletes' },
-  { value: 'UNIVERSITY_REP', label: 'University Rep', description: 'Find top African students' },
+  { value: 'UNIVERSITY_REP', label: 'University Rep', description: 'Find top Zimbabwean students' },
 ];
 
 export default function RegisterPage() {
@@ -89,7 +89,7 @@ export default function RegisterPage() {
             </div>
             <span className="font-display font-bold text-2xl text-white">Mwana Global</span>
           </Link>
-          <h2 className="text-3xl font-display font-bold text-white mb-4">Join 10,000+ African Students</h2>
+          <h2 className="text-3xl font-display font-bold text-white mb-4">Join 10,000+ Zimbabwean Students</h2>
           <p className="text-white/70 leading-relaxed">Discover scholarships, universities, sports recruitment, fellowships and more. Your global journey starts here.</p>
           <div className="mt-8 space-y-3">
             {['Free forever for students', 'AI-powered opportunity matching', 'Verified recommendations', 'Scout-ready sports profile'].map(item => (
