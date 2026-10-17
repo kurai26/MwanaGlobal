@@ -151,7 +151,7 @@ export default function AboutPage() {
         <section className="bg-brand-blue py-16 px-4 text-center">
           <div className="max-w-2xl mx-auto">
             <h2 className="text-3xl font-display font-bold text-white mb-4">Join the Movement</h2>
-            <p className="text-white/80 mb-8">Be part of the generation that changes the story of African education.</p>
+            <p className="text-white/80 mb-8">Be part of the generation that changes the story of Zimbabwean education.</p>
             <a href="/auth/register" className="inline-block bg-brand-gold text-brand-blue font-semibold px-8 py-3 rounded-xl hover:bg-brand-gold/90 transition-colors">
               Create Your Profile Free
             </a>
