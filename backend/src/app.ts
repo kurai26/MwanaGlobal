@@ -27,6 +27,9 @@ app.use(cors({
 app.use('/api/auth', rateLimit({ windowMs: 15 * 60 * 1000, max: 20, message: 'Too many requests from this IP' }));
 app.use('/api', rateLimit({ windowMs: 15 * 60 * 1000, max: 200 }));
 
+// Subscription routes mounted first — webhook needs raw body before express.json()
+app.use('/api/subscriptions', subscriptionRoutes);
+
 // Body parsing
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
@@ -45,7 +48,6 @@ app.use('/api/auth', authRoutes);
 app.use('/api/profile', profileRoutes);
 app.use('/api/opportunities', opportunityRoutes);
 app.use('/api/applications', applicationRoutes);
-app.use('/api/subscriptions', subscriptionRoutes);
 
 // Public profile route
 app.get('/api/profiles/:profileId', async (req, res, next) => {

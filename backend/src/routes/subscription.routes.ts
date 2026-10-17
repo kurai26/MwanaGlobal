@@ -8,7 +8,7 @@ const router = Router();
 // Webhook must use raw body — mounted before global json middleware via app.ts
 router.post('/webhook', express.raw({ type: 'application/json' }), handleWebhook);
 
-router.post('/create-checkout', authenticate, createCheckout);
-router.post('/cancel', authenticate, cancelSubscription);
+router.post('/create-checkout', express.json(), authenticate, createCheckout);
+router.post('/cancel', express.json(), authenticate, cancelSubscription);
 
 export default router;
