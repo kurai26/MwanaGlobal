@@ -13,13 +13,13 @@ const features = [
   {
     icon: Search,
     title: 'Scholarship Discovery',
-    description: 'Access thousands of scholarships specifically available to African students — from STEM to arts, sports to humanities. Filter by country, funding level, and deadline.',
+    description: 'Access thousands of scholarships specifically available to Zimbabwean students — from STEM to arts, sports to humanities. Filter by funding level and deadline.',
     color: 'bg-yellow-100 text-yellow-700',
   },
   {
     icon: Trophy,
     title: 'Sports Recruitment',
-    description: 'NCAA coaches, professional academies, and scouts actively search Mwana Global for talented African athletes. Showcase your highlights and statistics.',
+    description: 'NCAA coaches, professional academies, and scouts actively search Mwana Global for talented Zimbabwean athletes. Showcase your highlights and statistics.',
     color: 'bg-green-100 text-green-700',
   },
   {
@@ -42,8 +42,8 @@ const features = [
   },
   {
     icon: Globe2,
-    title: 'Pan-African Network',
-    description: 'Connect with students across 15+ African countries. Learn from peers who have successfully navigated the application process.',
+    title: 'Zimbabwean Network',
+    description: 'Connect with students across Zimbabwe and beyond. Learn from peers who have successfully navigated the application process.',
     color: 'bg-teal-100 text-teal-700',
   },
   {

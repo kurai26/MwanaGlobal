@@ -72,6 +72,12 @@ enum VerificationStatus {
   REJECTED
 }
 
+enum SubscriptionTier {
+  BRONZE
+  SILVER
+  GOLD
+}
+
 // ============================================================
 // USER & AUTH
 // ============================================================
@@ -90,6 +96,8 @@ model User {
   resetPasswordExpiry DateTime?
   isActive          Boolean   @default(true)
   lastLoginAt       DateTime?
+  subscriptionTier  SubscriptionTier @default(BRONZE)
+  subscriptionExpiry DateTime?
   createdAt         DateTime  @default(now())
   updatedAt         DateTime  @updatedAt
 
@@ -448,6 +456,12 @@ model Opportunity {
   tuitionCovered  Boolean         @default(false)
   accommodationCovered Boolean    @default(false)
 
+  // Apply options
+  directApplyUrl  String?
+  agentName       String?
+  agentUrl        String?
+  agentContact    String?
+
   // Dates
   applicationDeadline DateTime?
   programStartDate    DateTime?
@@ -491,6 +505,7 @@ model OpportunityMatch {
   generatedAt   DateTime @default(now())
 
   @@unique([studentId, opportunityId])
+  @@index([studentId, fitScore])
   @@map("opportunity_matches")
 }
 

@@ -4,9 +4,9 @@ import { motion, useInView } from 'framer-motion';
 import { useRef, useEffect, useState } from 'react';
 
 const stats = [
-  { value: 10000, suffix: '+', label: 'Student Profiles', description: 'Across 15 African countries' },
+  { value: 10000, suffix: '+', label: 'Student Profiles', description: 'Across Zimbabwe' },
   { value: 500, suffix: '+', label: 'Opportunities', description: 'Universities, scholarships & more' },
-  { value: 2, prefix: '$', suffix: 'M+', label: 'In Scholarships', description: 'Facilitated for African students' },
+  { value: 2, prefix: '$', suffix: 'M+', label: 'In Scholarships', description: 'Facilitated for Zimbabwean students' },
   { value: 95, suffix: '%', label: 'Match Accuracy', description: 'AI-powered opportunity matching' },
 ];
 

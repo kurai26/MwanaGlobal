@@ -8,7 +8,8 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Bookmark, BookmarkCheck, ExternalLink, Search, Filter, Calendar, MapPin, DollarSign } from 'lucide-react';
+import { Bookmark, BookmarkCheck, Search, Filter, Calendar, MapPin, DollarSign } from 'lucide-react';
+import { ApplyDropdown } from '@/components/opportunities/ApplyDropdown';
 import { cn } from '@/lib/utils';
 
 const OPPORTUNITY_TYPES = [
@@ -174,13 +175,14 @@ export default function OpportunitiesPage() {
                 )}
               </div>
 
-              {opp.applicationUrl && (
-                <a href={opp.applicationUrl} target="_blank" rel="noopener noreferrer">
-                  <Button size="sm" className="w-full bg-brand-blue hover:bg-brand-blue/90 text-xs">
-                    Apply Now <ExternalLink className="w-3 h-3 ml-1.5" />
-                  </Button>
-                </a>
-              )}
+              <div className="flex justify-end">
+                <ApplyDropdown
+                  directApplyUrl={opp.directApplyUrl ?? opp.applicationUrl}
+                  agentName={opp.agentName}
+                  agentUrl={opp.agentUrl}
+                  agentContact={opp.agentContact}
+                />
+              </div>
             </div>
           );
         })}

@@ -71,7 +71,7 @@ export function Hero() {
           {/* Badge */}
           <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={0} className="inline-flex items-center gap-2 bg-brand-gold/15 border border-brand-gold/30 rounded-full px-4 py-2 mb-8">
             <Globe2 className="w-4 h-4 text-brand-gold" />
-            <span className="text-brand-gold text-sm font-medium">Africa's #1 Student Opportunity Platform</span>
+            <span className="text-brand-gold text-sm font-medium">Zimbabwe's #1 Student Opportunity Platform</span>
           </motion.div>
 
           {/* Headline */}
@@ -112,7 +112,7 @@ export function Hero() {
             custom={2}
             className="text-xl md:text-2xl text-white/75 max-w-2xl mx-auto mb-10 leading-relaxed"
           >
-            Mwana Global matches African students with scholarships, universities, sports
+            Mwana Global matches Zimbabwean students with scholarships, universities, sports
             recruitment opportunities and global education pathways.
           </motion.p>
 

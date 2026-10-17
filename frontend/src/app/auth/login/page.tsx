@@ -56,7 +56,7 @@ export default function LoginPage() {
             Welcome Back
           </h1>
           <p className="text-white/70 text-lg leading-relaxed">
-            Continue your journey to global opportunities. Thousands of African students are discovering their path.
+            Continue your journey to global opportunities. Thousands of Zimbabwean students are discovering their path.
           </p>
           <div className="mt-8 p-4 bg-white/10 rounded-xl border border-white/20">
             <p className="text-brand-gold text-sm font-medium mb-1">Latest Match</p>

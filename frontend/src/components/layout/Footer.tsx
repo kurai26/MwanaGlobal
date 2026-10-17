@@ -42,7 +42,7 @@ export function Footer() {
               <span className="font-display font-bold text-xl text-white">Mwana Global</span>
             </Link>
             <p className="text-gray-400 text-sm leading-relaxed mb-6">
-              Discover Where Your Talent Can Take You. Africa's largest student opportunity platform connecting students with scholarships, universities, and sports recruitment worldwide.
+              Discover Where Your Talent Can Take You. Zimbabwe's leading student opportunity platform connecting students with scholarships, universities, and sports recruitment worldwide.
             </p>
             <div className="flex items-center gap-3">
               <a href="https://twitter.com/MwanaGlobal" target="_blank" rel="noopener noreferrer" className="w-9 h-9 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-brand-blue transition-colors">
@@ -80,7 +80,7 @@ export function Footer() {
         {/* Bottom bar */}
         <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-gray-500 text-sm">
-            © {new Date().getFullYear()} Mwana Global. All rights reserved. Built for African Excellence.
+            © {new Date().getFullYear()} Mwana Global. All rights reserved. Built for Zimbabwean Excellence.
           </p>
           <div className="flex items-center gap-2 text-gray-500 text-sm">
             <Mail className="w-4 h-4" />

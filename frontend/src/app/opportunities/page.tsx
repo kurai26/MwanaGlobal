@@ -6,7 +6,7 @@ import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: 'Opportunities | Mwana Global',
-  description: 'Explore universities, scholarships, sports recruitment, fellowships, and more for African students.',
+  description: 'Explore universities, scholarships, sports recruitment, fellowships, and more for Zimbabwean students.',
 };
 
 const CATEGORIES = [
@@ -14,7 +14,7 @@ const CATEGORIES = [
     icon: GraduationCap,
     title: 'Universities',
     count: '200+',
-    description: 'Top institutions across Africa, UK, US, and beyond looking for African talent.',
+    description: 'Top institutions across the UK, US, and beyond looking for Zimbabwean talent.',
     color: 'bg-blue-600',
     lightColor: 'bg-blue-50 text-blue-700',
     href: '/auth/register',
@@ -23,7 +23,7 @@ const CATEGORIES = [
     icon: Award,
     title: 'Scholarships',
     count: '150+',
-    description: 'Fully funded and partial scholarships from governments, institutions, and foundations.',
+    description: 'Fully funded and partial scholarships for Zimbabwean students from governments, institutions, and foundations.',
     color: 'bg-yellow-500',
     lightColor: 'bg-yellow-50 text-yellow-700',
     href: '/auth/register',

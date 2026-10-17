@@ -18,7 +18,7 @@ const categories = [
   {
     icon: DollarSign,
     title: 'Scholarships',
-    description: 'Full and partial scholarships for African students. No financial barrier is too great.',
+    description: 'Full and partial scholarships for Zimbabwean students. No financial barrier is too great.',
     count: '150+',
     color: 'from-brand-gold to-yellow-400',
     bg: 'bg-yellow-50',
@@ -46,7 +46,7 @@ const categories = [
   {
     icon: Star,
     title: 'Fellowships',
-    description: 'Prestigious fellowships for future African leaders. YALI, Rhodes, and more.',
+    description: 'Prestigious fellowships for future Zimbabwean leaders. YALI, Rhodes, and more.',
     count: '30+',
     color: 'from-orange-500 to-red-400',
     bg: 'bg-orange-50',
@@ -55,7 +55,7 @@ const categories = [
   {
     icon: Users,
     title: 'Leadership Programmes',
-    description: 'African Leadership Academy, Mandela Rhodes, and world-class leadership tracks.',
+    description: 'Zimbabwe Leadership Academy, Mandela Rhodes, and world-class leadership tracks.',
     count: '25+',
     color: 'from-teal-500 to-cyan-400',
     bg: 'bg-teal-50',
@@ -98,7 +98,7 @@ export function OpportunitiesSection() {
             Every Path to Success, In One Place
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            From full scholarships to sports recruitment — discover every opportunity available to African students.
+            From full scholarships to sports recruitment — discover every opportunity available to Zimbabwean students.
           </p>
         </motion.div>
 

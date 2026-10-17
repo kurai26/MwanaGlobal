@@ -10,6 +10,7 @@ interface User {
   role: string;
   isEmailVerified?: boolean;
   studentProfile?: { id: string; profilePhotoUrl?: string; country?: string; overallScore?: number };
+  subscriptionTier?: 'BRONZE' | 'SILVER' | 'GOLD';
 }
 
 interface AuthState {

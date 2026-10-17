@@ -26,7 +26,7 @@ const testimonials = [
     name: 'Kemunto Achieng',
     country: 'Kenya',
     achievement: 'YALI Fellowship',
-    university: 'Young African Leaders Initiative',
+    university: 'Young Zimbabwean Leaders Initiative',
     quote: 'I never thought I qualified for fellowships until Mwana Global showed me I had a 78% match. The roadmap told me exactly what I needed. Today I\'m a YALI fellow.',
     initials: 'KA',
     color: 'from-purple-500 to-violet-400',
@@ -93,7 +93,7 @@ export function SuccessStories() {
           className="text-center mt-12"
         >
           <p className="text-white/60 text-lg">
-            Your success story starts with a profile. Join <span className="text-brand-gold font-semibold">10,000+</span> African students already on the platform.
+            Your success story starts with a profile. Join <span className="text-brand-gold font-semibold">10,000+</span> Zimbabwean students already on the platform.
           </p>
         </motion.div>
       </div>

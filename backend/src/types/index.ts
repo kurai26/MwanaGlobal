@@ -5,6 +5,7 @@ export interface JwtPayload {
   userId: string;
   email: string;
   role: UserRole;
+  subscriptionTier?: 'BRONZE' | 'SILVER' | 'GOLD';
   iat?: number;
   exp?: number;
 }

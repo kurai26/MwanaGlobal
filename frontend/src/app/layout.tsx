@@ -13,8 +13,8 @@ export const metadata: Metadata = {
     template: '%s | Mwana Global',
   },
   description:
-    'Mwana Global matches African students with scholarships, universities, sports recruitment opportunities and global education pathways.',
-  keywords: ['African students', 'scholarships', 'university', 'sports recruitment', 'fellowships', 'education', 'Zimbabwe', 'Africa'],
+    'Mwana Global matches Zimbabwean students with scholarships, universities, sports recruitment opportunities and global education pathways.',
+  keywords: ['Zimbabwean students', 'scholarships', 'university', 'sports recruitment', 'fellowships', 'education', 'Zimbabwe', 'Africa'],
   authors: [{ name: 'Mwana Global' }],
   openGraph: {
     type: 'website',
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     url: 'https://mwanaglobal.com',
     siteName: 'Mwana Global',
     title: 'Mwana Global - Discover Where Your Talent Can Take You',
-    description: 'Connecting African students with global opportunities.',
+    description: 'Connecting Zimbabwean students with global opportunities.',
     images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Mwana Global' }],
   },
   twitter: {
